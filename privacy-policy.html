@@ -1,493 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — eBay Orders Dashboard Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0e1a;
-      --surface: #111827;
-      --surface2: #1a2235;
-      --border: #1e2d45;
-      --accent: #3b82f6;
-      --accent2: #06b6d4;
-      --green: #10b981;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --heading: #f8fafc;
-    }
+eBay Orders
+Dashboard Pro
+Privacy Policy for Chrome Web Store Extension
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+Effective: June 2025
+Version: 1.2
+Scope: ebay.co.uk · ebay.com · ebay.com.au
+🛡️
+Overview
+eBay Orders Dashboard Pro is a Chrome browser extension built for eBay sellers. It enhances the eBay Seller Hub Orders page with a real-time dashboard showing order details, buyer information, item data, and financial summaries.
 
-    body {
-      font-family: 'Sora', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.7;
-    }
+This Privacy Policy explains what data the extension accesses, how it is used, and your rights as a user. We are committed to full transparency and do not collect, sell, or misuse your data.
 
-    /* ── Background grid ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
+📦
+Data the Extension Accesses
+While you are on your eBay Orders page, the extension reads the following data from eBay's website to display it inside the dashboard:
 
-    .wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 60px 24px 100px;
-      position: relative;
-      z-index: 1;
-    }
+Order IDs — to fetch and display each order
+Buyer name & shipping address — shown in order cards, used for copy/export
+Phone number — displayed per order card (if provided by eBay)
+Item title, SKU, variation, quantity — shown in order details
+Order earnings, fees, ad fees — shown as financial summary per order
+Transaction IDs & Item IDs — used for linking and copy functions
+eBay username — saved locally for multi-account Supabase sync
+⚙️
+How Data is Used
+All accessed data is used solely for the extension's core purpose: displaying and managing eBay orders within your browser session.
 
-    /* ── Header ── */
-    .header {
-      text-align: center;
-      margin-bottom: 56px;
-      animation: fadeUp 0.6s ease both;
-    }
+Order data is displayed in the dashboard for the current browser session only
+Clipboard copy functions send data only to your local clipboard
+CSV export saves data only to your local device
+Bought/unbought status is saved locally in your browser (localStorage)
+If you connect Supabase, order data is synced to your own private database
+Your eBay username is stored locally only for session identification
+🔑
+Permissions Explained
+clipboardWrite
+Allows copying order data (address, SKU, earnings) to your clipboard when you click Copy buttons.
+storage
+Saves your preferences, Supabase credentials, and bought/unbought status locally in your browser. No external transmission.
+ebay.co.uk / ebay.com / ebay.com.au
+Required to read order data from your eBay Seller Hub session and fetch order detail pages.
+supabase.co (optional)
+Only used if you manually enter your own Supabase URL and key to sync order status across devices.
+☁️
+Optional Supabase Cloud Sync
+The extension offers an optional feature to connect your own Supabase project for syncing order bought/unbought status across devices or accounts.
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.25);
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-      letter-spacing: 0.05em;
-    }
-
-    .badge::before {
-      content: '';
-      width: 7px; height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    h1 {
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 800;
-      color: var(--heading);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-    }
-
-    h1 span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .meta-item {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .meta-item strong { color: var(--accent2); }
-
-    /* ── Sections ── */
-    .section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 20px;
-      animation: fadeUp 0.6s ease both;
-      transition: border-color 0.2s ease;
-    }
-
-    .section:hover { border-color: rgba(59,130,246,0.2); }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .icon-box {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .icon-blue   { background: rgba(59,130,246,0.12); }
-    .icon-green  { background: rgba(16,185,129,0.12); }
-    .icon-cyan   { background: rgba(6,182,212,0.12); }
-    .icon-amber  { background: rgba(245,158,11,0.12); }
-    .icon-purple { background: rgba(139,92,246,0.12); }
-    .icon-red    { background: rgba(239,68,68,0.12); }
-
-    h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--heading);
-    }
-
-    p { color: var(--text); font-size: 14.5px; margin-bottom: 12px; }
-    p:last-child { margin-bottom: 0; }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 4px;
-    }
-
-    ul li {
-      font-size: 14.5px;
-      color: var(--text);
-      padding: 7px 0 7px 22px;
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
-
-    ul li:last-child { border-bottom: none; }
-
-    ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 13px;
-    }
-
-    /* ── Permission cards ── */
-    .perm-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 580px) { .perm-grid { grid-template-columns: 1fr; } }
-
-    .perm-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .perm-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--accent2);
-      margin-bottom: 6px;
-      font-weight: 500;
-    }
-
-    .perm-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* ── Certify block ── */
-    .certify-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .certify-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: rgba(16,185,129,0.06);
-      border: 1px solid rgba(16,185,129,0.15);
-      border-radius: 10px;
-      padding: 12px 16px;
-    }
-
-    .check {
-      width: 22px; height: 22px;
-      background: var(--green);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .certify-text { font-size: 14px; color: var(--text); }
-
-    /* ── Contact ── */
-    .contact-box {
-      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(6,182,212,0.08));
-      border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 12px;
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .contact-box p { margin: 0; font-size: 14px; }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 9px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-
-    .contact-link:hover { opacity: 0.85; }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      margin-top: 48px;
-      color: var(--muted);
-      font-size: 13px;
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
-
-    footer a { color: var(--accent); text-decoration: none; }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .section:nth-child(1) { animation-delay: 0.05s; }
-    .section:nth-child(2) { animation-delay: 0.10s; }
-    .section:nth-child(3) { animation-delay: 0.15s; }
-    .section:nth-child(4) { animation-delay: 0.20s; }
-    .section:nth-child(5) { animation-delay: 0.25s; }
-    .section:nth-child(6) { animation-delay: 0.30s; }
-    .section:nth-child(7) { animation-delay: 0.35s; }
-    .section:nth-child(8) { animation-delay: 0.40s; }
-  </style>
-</head>
-<body>
-<div class="wrap">
-
-  <!-- Header -->
-  <div class="header">
-    <div class="badge">Chrome Extension · Privacy Policy</div>
-    <h1>eBay Orders<br><span>Dashboard Pro</span></h1>
-    <p class="subtitle">Privacy Policy for Chrome Web Store Extension</p>
-    <div class="meta">
-      <span class="meta-item">Effective: <strong>June 2025</strong></span>
-      <span class="meta-item">Version: <strong>1.2</strong></span>
-      <span class="meta-item">Scope: <strong>ebay.co.uk · ebay.com · ebay.com.au</strong></span>
-    </div>
-  </div>
-
-  <!-- 1. Overview -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-blue">🛡️</div>
-      <h2>Overview</h2>
-    </div>
-    <p>
-      <strong>eBay Orders Dashboard Pro</strong> is a Chrome browser extension built for eBay sellers.
-      It enhances the eBay Seller Hub Orders page with a real-time dashboard showing order details,
-      buyer information, item data, and financial summaries.
-    </p>
-    <p>
-      This Privacy Policy explains what data the extension accesses, how it is used, and your rights
-      as a user. We are committed to full transparency and do not collect, sell, or misuse your data.
-    </p>
-  </div>
-
-  <!-- 2. Data Accessed -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-cyan">📦</div>
-      <h2>Data the Extension Accesses</h2>
-    </div>
-    <p>While you are on your eBay Orders page, the extension reads the following data from eBay's website to display it inside the dashboard:</p>
-    <ul>
-      <li><strong>Order IDs</strong> — to fetch and display each order</li>
-      <li><strong>Buyer name &amp; shipping address</strong> — shown in order cards, used for copy/export</li>
-      <li><strong>Phone number</strong> — displayed per order card (if provided by eBay)</li>
-      <li><strong>Item title, SKU, variation, quantity</strong> — shown in order details</li>
-      <li><strong>Order earnings, fees, ad fees</strong> — shown as financial summary per order</li>
-      <li><strong>Transaction IDs &amp; Item IDs</strong> — used for linking and copy functions</li>
-      <li><strong>eBay username</strong> — saved locally for multi-account Supabase sync</li>
-    </ul>
-  </div>
-
-  <!-- 3. How Data is Used -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-green">⚙️</div>
-      <h2>How Data is Used</h2>
-    </div>
-    <p>All accessed data is used <strong>solely for the extension's core purpose</strong>: displaying and managing eBay orders within your browser session.</p>
-    <ul>
-      <li>Order data is <strong>displayed in the dashboard</strong> for the current browser session only</li>
-      <li>Clipboard copy functions send data <strong>only to your local clipboard</strong></li>
-      <li>CSV export saves data <strong>only to your local device</strong></li>
-      <li>Bought/unbought status is saved <strong>locally in your browser</strong> (localStorage)</li>
-      <li>If you connect Supabase, order data is synced <strong>to your own private database</strong></li>
-      <li>Your eBay username is stored <strong>locally only</strong> for session identification</li>
-    </ul>
-  </div>
-
-  <!-- 4. Permissions -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-amber">🔑</div>
-      <h2>Permissions Explained</h2>
-    </div>
-    <div class="perm-grid">
-      <div class="perm-card">
-        <div class="perm-name">clipboardWrite</div>
-        <div class="perm-desc">Allows copying order data (address, SKU, earnings) to your clipboard when you click Copy buttons.</div>
-      </div>
-      <div class="perm-card">
-        <div class="perm-name">storage</div>
-        <div class="perm-desc">Saves your preferences, Supabase credentials, and bought/unbought status locally in your browser. No external transmission.</div>
-      </div>
-      <div class="perm-card">
-        <div class="perm-name">ebay.co.uk / ebay.com / ebay.com.au</div>
-        <div class="perm-desc">Required to read order data from your eBay Seller Hub session and fetch order detail pages.</div>
-      </div>
-      <div class="perm-card">
-        <div class="perm-name">supabase.co (optional)</div>
-        <div class="perm-desc">Only used if you manually enter your own Supabase URL and key to sync order status across devices.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Supabase Sync -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-purple">☁️</div>
-      <h2>Optional Supabase Cloud Sync</h2>
-    </div>
-    <p>
-      The extension offers an <strong>optional</strong> feature to connect your own Supabase project
-      for syncing order bought/unbought status across devices or accounts.
-    </p>
-    <ul>
-      <li>Supabase integration is <strong>100% optional</strong> — the extension works fully without it</li>
-      <li>You must manually enter <strong>your own</strong> Supabase URL and anon key</li>
-      <li>Data is sent only to <strong>your private Supabase database</strong> — not to any developer server</li>
-      <li>We have <strong>no access</strong> to your Supabase project or its data</li>
-      <li>You can disconnect or delete your Supabase config at any time from the settings panel</li>
-    </ul>
-  </div>
-
-  <!-- 6. Data NOT Collected -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-red">🚫</div>
-      <h2>What We Do NOT Collect</h2>
-    </div>
-    <ul>
-      <li>We do <strong>not</strong> transmit any data to the extension developer's servers</li>
-      <li>We do <strong>not</strong> track browsing history or activity outside eBay order pages</li>
-      <li>We do <strong>not</strong> use analytics, tracking pixels, or fingerprinting</li>
-      <li>We do <strong>not</strong> sell, share, or trade any user data with third parties</li>
-      <li>We do <strong>not</strong> access eBay passwords, payment methods, or account credentials</li>
-      <li>We do <strong>not</strong> run on any pages other than eBay Seller Hub order pages</li>
-    </ul>
-  </div>
-
-  <!-- 7. Certifications -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-green">✅</div>
-      <h2>Developer Certifications</h2>
-    </div>
-    <div class="certify-list">
-      <div class="certify-item">
-        <div class="check">✓</div>
-        <div class="certify-text">We do <strong>not sell or transfer user data</strong> to third parties, outside of approved use cases.</div>
-      </div>
-      <div class="certify-item">
-        <div class="check">✓</div>
-        <div class="certify-text">We do <strong>not use or transfer user data</strong> for purposes that are unrelated to this extension's single purpose.</div>
-      </div>
-      <div class="certify-item">
-        <div class="check">✓</div>
-        <div class="certify-text">We do <strong>not use or transfer user data</strong> to determine creditworthiness or for lending purposes.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 8. Contact -->
-  <div class="section">
-    <div class="section-header">
-      <div class="icon-box icon-cyan">📬</div>
-      <h2>Contact & Updates</h2>
-    </div>
-    <p>If you have any questions about this Privacy Policy or how the extension handles your data, please open a GitHub issue or contact us directly.</p>
-    <div class="contact-box" style="margin-top: 16px;">
-      <p>Questions or concerns about your privacy?</p>
-      <a href="https://github.com" class="contact-link">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        Open GitHub Issue
-      </a>
-    </div>
-    <p style="margin-top:16px; font-size:13px; color: var(--muted);">
-      This Privacy Policy may be updated as new features are added. The "Effective" date at the top will reflect the latest revision. Continued use of the extension after changes constitutes acceptance of the updated policy.
-    </p>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>eBay Orders Dashboard Pro · Chrome Extension · v1.2</p>
-    <p style="margin-top:6px;">This extension is not affiliated with or endorsed by eBay Inc.</p>
-  </footer>
-
-</div>
-</body>
-</html>
+Supabase integration is 100% optional — the extension works fully without it
+You must manually enter your own Supabase URL and anon key
+Data is sent only to your private Supabase database — not to any developer server
+We have no access to your Supabase project or its data
+You can disconnect or delete your Supabase config at any time from the settings panel
+🚫
+What We Do NOT Collect
+We do not transmit any data to the extension developer's servers
+We do not track browsing history or activity outside eBay order pages
+We do not use analytics, tracking pixels, or fingerprinting
+We do not sell, share, or trade any user data with third parties
+We do not access eBay passwords, payment methods, or account credentials
+We do not run on any pages other than eBay Seller Hub order pages
+✅
+Developer Certifications
+✓
+We do not sell or transfer user data to third parties, outside of approved use cases.
+✓
+We do not use or transfer user data for purposes that are unrelated to this extension's single purpose.
+✓
+We do not use or transfer user data to determine creditworthiness or for lending purposes.
